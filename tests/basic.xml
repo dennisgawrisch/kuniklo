@@ -1,0 +1,162 @@
+<tests>
+    <test>
+        <title>Empty document</title>
+        <source />
+        <document />
+    </test>
+    <test>
+        <title>Single paragraph</title>
+        <source>The paragraph.</source>
+        <document>
+            <paragraph>The paragraph.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Multiple paragraphs</title>
+        <source><![CDATA[
+The first paragraph.
+
+And the second one.
+
+Finally, the third.
+        ]]></source>
+        <document>
+            <paragraph>The first paragraph.</paragraph>
+            <paragraph>And the second one.</paragraph>
+            <paragraph>Finally, the third.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Escaping special characters</title>
+        <source><![CDATA[Trying to <emphasis>hack</emphasis>.]]></source>
+        <document>
+            <paragraph>Trying to &lt;emphasis&gt;hack&lt;/emphasis&gt;.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Emphasis</title>
+        <source>Some *text*.</source>
+        <document>
+            <paragraph>Some <emphasis>text</emphasis>.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Two emphasises in a row</title>
+        <source>Some *text* and some *another* text.</source>
+        <document>
+            <paragraph>Some <emphasis>text</emphasis> and some <emphasis>another</emphasis> text.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Strong accentuation</title>
+        <source>Some **text**.</source>
+        <document>
+            <paragraph>Some <strong>text</strong>.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Two strong accentuations in a row</title>
+        <source>Some **text** and some **another** text.</source>
+        <document>
+            <paragraph>Some <strong>text</strong> and some <strong>another</strong> text.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Emphasis and strong accentuation mixed</title>
+        <source>*Emphasis **and accentuation***. **Accentuation *and emphasis***.</source>
+        <document>
+            <paragraph><emphasis>Emphasis <strong>and accentuation</strong></emphasis>. <strong>Accentuation <emphasis>and emphasis</emphasis></strong>.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Explicit hyperlink</title>
+        <source>Some %text%http://example.com/url%.</source>
+        <document>
+            <paragraph>Some <link href="http://example.com/url">text</link>.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Explicit hyperlink with relative URL</title>
+        <source>Some %text%/url%.</source>
+        <document>
+            <paragraph>Some <link href="/url">text</link>.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Explicit hyperlink with percent sign in URL</title>
+        <source>Some %text%http://example.com/?q=hi%20there%.</source>
+        <document>
+            <paragraph>Some <link href="http://example.com/?q=hi%20there">text</link>.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Two explicit hyperlinks in a row</title>
+        <source>Some %link%http://example.com/url% and some %another link%http://example.net/%.</source>
+        <document>
+            <paragraph>Some <link href="http://example.com/url">link</link> and some <link href="http://example.net/">another link</link>.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Picture</title>
+        <source>;http://example.net/picture.jpeg (That’s the picture)</source>
+        <document>
+            <picture href="http://example.net/picture.jpeg">That’s the picture</picture>
+        </document>
+    </test>
+    <test>
+        <title>Picture between paragraphs</title>
+        <source><![CDATA[
+The picture should be below.
+
+;http://example.net/picture.jpeg (That’s the picture)
+
+The picture should be above.
+        ]]></source>
+        <document>
+            <paragraph>The picture should be below.</paragraph>
+            <picture href="http://example.net/picture.jpeg">That’s the picture</picture>
+            <paragraph>The picture should be above.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Quotation (single paragraph)</title>
+        <source><![CDATA[
+HTML Specification says:
+
+"""
+The following HTML elements [TT, I, B, BIG, SMALL, STRIKE, S, and U] specify font information. Although they are not all deprecated, their use is discouraged in favor of style sheets.
+"""
+
+You should never use these elements. Never.
+        ]]></source>
+        <document>
+            <paragraph>HTML Specification says:</paragraph>
+            <quotation>
+                <paragraph>The following HTML elements [TT, I, B, BIG, SMALL, STRIKE, S, and U] specify font information. Although they are not all deprecated, their use is discouraged in favor of style sheets.</paragraph>
+            </quotation>
+            <paragraph>You should never use these elements. Never.</paragraph>
+        </document>
+    </test>
+    <test>
+        <title>Quotation (several paragraphs)</title>
+        <source><![CDATA[
+HTML Specification says:
+
+"""
+HTML has its roots in SGML which has always been a language for the specification of structural markup. As HTML matures, more and more of its presentational elements and attributes are being replaced by other mechanisms, in particular style sheets. Experience has shown that separating the structure of a document from its presentational aspects reduces the cost of serving a wide range of platforms, media, etc., and facilitates document revisions.
+
+Before the advent of style sheets, authors had limited control over rendering. HTML 3.2 included a number of attributes and elements offering control over alignment, font size, and text color. Authors also exploited tables and images as a means for laying out pages. The relatively long time it takes for users to upgrade their browsers means that these features will continue to be used for some time. However, since style sheets offer more powerful presentation mechanisms, the World Wide Web Consortium will eventually phase out many of HTML's presentation elements and attributes.
+"""
+
+Never do presentation in HTML. Never.
+        ]]></source>
+        <document>
+            <paragraph>HTML Specification says:</paragraph>
+            <quotation>
+                <paragraph>HTML has its roots in SGML which has always been a language for the specification of structural markup. As HTML matures, more and more of its presentational elements and attributes are being replaced by other mechanisms, in particular style sheets. Experience has shown that separating the structure of a document from its presentational aspects reduces the cost of serving a wide range of platforms, media, etc., and facilitates document revisions.</paragraph>
+                <paragraph>Before the advent of style sheets, authors had limited control over rendering. HTML 3.2 included a number of attributes and elements offering control over alignment, font size, and text color. Authors also exploited tables and images as a means for laying out pages. The relatively long time it takes for users to upgrade their browsers means that these features will continue to be used for some time. However, since style sheets offer more powerful presentation mechanisms, the World Wide Web Consortium will eventually phase out many of HTML's presentation elements and attributes.</paragraph>
+            </quotation>
+            <paragraph>Never do presentation in HTML. Never.</paragraph>
+        </document>
+    </test>
+</tests>
